@@ -11,9 +11,7 @@ from FinMind.data import DataLoader
 import datetime
 import time
 from dateutil.relativedelta import relativedelta
-#忽略警告訊息
-import warnings
-warnings.simplefilter("ignore")
+import pandas as pd
 
 url=[f"https://histock.tw/stock/rank.aspx?&p={i}&d=1" for i in range(1,45)]
 
