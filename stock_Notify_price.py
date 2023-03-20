@@ -6,6 +6,11 @@
 
 #找出符合標準的stock
 import threading as tr
+import requests
+from FinMind.data import DataLoader
+import datetime
+import time
+from dateutil.relativedelta import relativedelta
 #忽略警告訊息
 import warnings
 warnings.simplefilter("ignore")
@@ -69,10 +74,6 @@ name_dict = dict(zip(code,name))
 
 
 #用finmind下載每支股票的資料
-from FinMind.data import DataLoader
-import datetime
-from dateutil.relativedelta import relativedelta
-
 warnings.simplefilter("ignore")
 
 x=datetime.datetime.now()
@@ -130,7 +131,6 @@ fin_list = [df_list[z[i]] for i in range(len(z))]
 
 
 #檢驗資料並傳送到line
-import time
 def line():
     url = 'https://notify-api.line.me/api/notify'
     token = '5YapilxtO1ZnjlWTXgMfHq8N7wl4yXRbLRboMrFBVpE'
