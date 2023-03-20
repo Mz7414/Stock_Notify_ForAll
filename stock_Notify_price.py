@@ -72,8 +72,6 @@ name_dict = dict(zip(code,name))
 
 
 #用finmind下載每支股票的資料
-warnings.simplefilter("ignore")
-
 x=datetime.datetime.now()
 start=(x- relativedelta(months=11)).strftime("%Y-%m-%d")
 end=x.strftime("%Y-%m-%d")
