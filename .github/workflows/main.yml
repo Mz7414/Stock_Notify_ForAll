@@ -19,6 +19,7 @@ jobs:
         pip install datetime
         pip install wheel
         pip install pandas
+        pip install lxml
         pip install FinMind
         pip install requests
     - name: runpython
