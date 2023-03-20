@@ -157,7 +157,7 @@ for i in range(len(fin_list)) :
         df = df.drop([0,1,2,3,4,5,6,7,8,10],axis=1) #刪除多餘直行
         df.reset_index(drop=True,inplace=True)
         x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
-        if max(x)-x[0]>=2 :
+        if max(x)-x[0]>=3 :
             line()
             time.sleep(2)
 
