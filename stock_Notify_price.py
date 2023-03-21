@@ -159,5 +159,5 @@ for i in range(len(fin_list)) :
         x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
         if max(x)-x[0]>=3 :
             line()
-            time.sleep(2)
+            time.sleep(0.7)
 
