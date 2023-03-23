@@ -22,5 +22,6 @@ jobs:
         pip install lxml
         pip install FinMind
         pip install requests
+        pip install beautifulsoup4
     - name: runpython
       run: python stock_Notify_price.py
