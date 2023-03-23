@@ -150,6 +150,8 @@ for i in range(len(fin_list)) :
     resp = requests.get(url)
     soup = BeautifulSoup(resp.text,'html.parser')
     y = soup.select(".Fz\(32px\)")[0].text
+    if ',' in y :
+        y = y.replace(',','')
     y = float(y)
     ma=max(x)
     mi=min(x)
