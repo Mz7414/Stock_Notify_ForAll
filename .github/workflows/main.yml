@@ -2,7 +2,7 @@ name: stock_all
 
 on:
   schedule:
-    - cron: "0 3 * * 1-5"
+    - cron: "0 6 * * 1-5"
     
 jobs:
   build:
@@ -22,6 +22,5 @@ jobs:
         pip install lxml
         pip install FinMind
         pip install requests
-        pip install beautifulsoup4
     - name: runpython
       run: python stock_Notify_price.py
