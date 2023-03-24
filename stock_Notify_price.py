@@ -11,7 +11,6 @@ from FinMind.data import DataLoader
 import datetime
 import time
 from dateutil.relativedelta import relativedelta
-from bs4 import BeautifulSoup
 import pandas as pd
 
 url=[f"https://histock.tw/stock/rank.aspx?&p={i}&d=1" for i in range(1,45)]
@@ -145,14 +144,8 @@ def line():
     
 for i in range(len(fin_list)) :
     x=list(fin_list[i]["close"])
-    stockid=code[i]
-    url = f'https://tw.stock.yahoo.com/quote/{stockid}'
-    resp = requests.get(url)
-    soup = BeautifulSoup(resp.text,'html.parser')
-    y = soup.select(".Fz\(32px\)")[0].text
-    if ',' in y :
-        y = y.replace(',','')
-    y = float(y)
+    y=x[-1]
+    stockid=code[i] 
     ma=max(x)
     mi=min(x)
     fin=(ma-mi)/4+mi
