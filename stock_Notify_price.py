@@ -17,7 +17,7 @@ import pandas as pd
 
 url=[f"https://histock.tw/stock/rank.aspx?&p={i}&d=1" for i in range(1,45)]
 
-def stock2(a,b,c) :
+def line(a,b,c) :
     dl = DataLoader()
     dfst = dl.taiwan_stock_daily(stock_id=a ,start_date=start)
     
@@ -64,6 +64,21 @@ def stock2(a,b,c) :
     plt.show()
     plt.savefig('s.jpg')
     image = open('s.jpg', 'rb')
+    url = 'https://notify-api.line.me/api/notify'
+    token = '5YapilxtO1ZnjlWTXgMfHq8N7wl4yXRbLRboMrFBVpE'
+    headers = {
+        'Authorization': 'Bearer ' + token    # 設定權杖
+    }
+    data = {
+        'message': 
+        "\n"+
+        f'{stockid}{name_dict[stockid]}'+'\n'+
+        f'股價已降至{y}元'+'\n'+
+        f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'
+        
+    }
+    file = {image}
+    data = requests.post(url, headers=headers, data=data, files=file)
 
 def stock(i):
     global code,name
@@ -177,23 +192,6 @@ fin_list = [df_list[z[i]] for i in range(len(z))]
 
 
 #檢驗資料並傳送到line
-def line():
-    url = 'https://notify-api.line.me/api/notify'
-    token = '5YapilxtO1ZnjlWTXgMfHq8N7wl4yXRbLRboMrFBVpE'
-    stock(stockid,start,end)
-    headers = {
-        'Authorization': 'Bearer ' + token    # 設定權杖
-    }
-    data = {
-        'message': 
-        "\n"+
-        f'{stockid}{name_dict[stockid]}'+'\n'+
-        f'股價已降至{y}元'+'\n'+
-        f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'
-        
-    }
-    file = {image}
-    data = requests.post(url, headers=headers, data=data, files=file)
     
 for i in range(len(fin_list)) :
     x=list(fin_list[i]["close"])
@@ -211,6 +209,6 @@ for i in range(len(fin_list)) :
         df.reset_index(drop=True,inplace=True)
         x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
         if max(x)-x[0]>=3 :
-            line()
+            line(stockid,start,end)
             time.sleep(0.7)
 
