@@ -18,9 +18,6 @@ import pandas as pd
 url=[f"https://histock.tw/stock/rank.aspx?&p={i}&d=1" for i in range(1,45)]
 
 def line(a,b,c) :
-    dl = DataLoader()
-    dfst = dl.taiwan_stock_daily(stock_id=a ,start_date=start)
-    
     url = f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={a}&c={b}&d={c}'
     resp = requests.get(url)
 
@@ -52,7 +49,7 @@ def line(a,b,c) :
     ax1.tick_params(axis='y', labelcolor='tab:blue')
     
     ax2.set_ylabel('price', color='tab:orange')
-    ax2.plot(df["日期"],dfst['close'], color='tab:orange')
+    ax2.plot(df["日期"],x, color='tab:orange')
     ax2.tick_params(axis='y', labelcolor='tab:orange')
     
     ax = plt.gca()
