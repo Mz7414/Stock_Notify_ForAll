@@ -58,7 +58,6 @@ def stock2(a,b,c) :
     ax = plt.gca()
     tick_spacing = df.index.size/3 # x軸密集度
     ax.xaxis.set_major_locator(mticker.MultipleLocator(tick_spacing))
-    ax.xaxis.set_major_locator(mticker.MultipleLocator(tick_spacing))
     
     fig.tight_layout()
     plt.grid()
