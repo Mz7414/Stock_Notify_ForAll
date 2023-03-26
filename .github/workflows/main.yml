@@ -22,6 +22,5 @@ jobs:
         pip install lxml
         pip install FinMind
         pip install requests
-        pip install matplotlib
     - name: runpython
       run: python stock_Notify_price.py
