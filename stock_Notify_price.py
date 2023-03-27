@@ -127,20 +127,14 @@ fin_list = [df_list[z[i]] for i in range(len(z))]
 
 
 #檢驗資料並傳送到line
-def line() :
+def line(data) :
     url = 'https://notify-api.line.me/api/notify'
     token = '5YapilxtO1ZnjlWTXgMfHq8N7wl4yXRbLRboMrFBVpE'
     headers = {
         'Authorization': 'Bearer ' + token    # 設定權杖
     }
-    data = {
-        'message': 
-        "\n"+
-        f'{stockid}{name_dict[stockid]}'+'\n'+
-        f'股價已降至{y}元'+'\n'+
-        f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
-    }
-    data = requests.post(url, headers=headers, data=data)
+   
+    requests.post(url, headers=headers, data=data)
 
 for i in range(len(fin_list)) :
     x=list(fin_list[i]["close"])
@@ -159,7 +153,22 @@ for i in range(len(fin_list)) :
         try :
             x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
             if max(x)-x[0]>=3 :
-                line()
+                data = {
+                 'message': 
+                 "\n"+
+                 f'{stockid}{name_dict[stockid]}'+'\n'+
+                 f'股價已降至{y}元'+'\n'+
+                 f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
+               }
+                line(data)
                 time.sleep(0.7)
         except :
-            line()
+            data = {
+            'message': 
+            "\n"+
+            f'{stockid}{name_dict[stockid]}'+'\n'+
+            f'股價已降至{y}元'+'\n'+
+            f'無外資資訊'+'\n'+
+            f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
+          }
+            line(data)
