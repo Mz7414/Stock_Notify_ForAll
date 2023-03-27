@@ -163,12 +163,16 @@ for i in range(len(fin_list)) :
                 line(data)
                 time.sleep(0.7)
         except :
-            data = {
-            'message': 
-            "\n"+
-            f'{stockid}{name_dict[stockid]}'+'\n'+
-            f'股價已降至{y}元'+'\n'+
-            f'無外資資訊'+'\n'+
-            f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
-          }
-            line(data)
+            df = df.drop([0])
+            x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
+            if max(x)-x[0]>=3 :
+                data = {
+                    'message': 
+                    "\n"+
+                    f'{stockid}{name_dict[stockid]}'+'\n'+
+                    f'股價已降至{y}元'+'\n'+
+                    f'無外資資訊'+'\n'+
+                    f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
+                    }
+                    line(data)
+                    time.sleep(0.7)
