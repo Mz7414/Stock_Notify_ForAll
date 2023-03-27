@@ -8,8 +8,6 @@
 import threading as tr
 import requests
 from FinMind.data import DataLoader
-import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
 import datetime
 import time
 from dateutil.relativedelta import relativedelta
