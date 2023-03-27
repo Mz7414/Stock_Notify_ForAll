@@ -174,5 +174,5 @@ for i in range(len(fin_list)) :
                     f'無外資資訊'+'\n'+
                     f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
                     }
-                    line(data)
-                    time.sleep(0.7)
+                line(data)
+                time.sleep(0.7)
