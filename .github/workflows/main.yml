@@ -2,7 +2,7 @@ name: stock_all
 
 on:
   schedule:
-    - cron: "0 6 * * 1-5"
+    - cron: "0 9 * * 1-5"
     
 jobs:
   build:
