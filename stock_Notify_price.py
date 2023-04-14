@@ -150,29 +150,16 @@ for i in range(len(fin_list)) :
         df = df.drop([0,1,2,3,4,5,6,df.shape[0]-1]) #刪除多餘橫排
         df = df.drop([0,1,2,3,4,5,6,7,8,10],axis=1) #刪除多餘直行
         df.reset_index(drop=True,inplace=True)
-        try :
-            x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
-            if max(x)-x[0]>=3 :
-                data = {
+        
+        x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
+        if max(x)-x[0]>=3 :
+            data = {
                  'message': 
                  "\n"+
                  f'{stockid}{name_dict[stockid]}'+'\n'+
                  f'股價已降至{y}元'+'\n'+
                  f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
                }
-                line(data)
-                time.sleep(0.7)
-        except :
-            df = df.drop([0])
-            x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
-            if max(x)-x[0]>=3 :
-                data = {
-                    'message': 
-                    "\n"+
-                    f'{stockid}{name_dict[stockid]}'+'\n'+
-                    f'股價已降至{y}元'+'\n'+
-                    f'無外資資訊'+'\n'+
-                    f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
-                    }
-                line(data)
-                time.sleep(0.7)
+            line(data)
+            time.sleep(0.7)
+        
