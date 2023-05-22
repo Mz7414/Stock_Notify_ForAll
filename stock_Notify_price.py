@@ -135,31 +135,40 @@ def line(data) :
     }
    
     requests.post(url, headers=headers, data=data)
+    
+try:
+    for i in range(len(fin_list)) :
+        x=list(fin_list[i]["close"])
+        y=x[-1]
+        stockid=code[i] 
+        ma=max(x)
+        mi=min(x)
+        fin=(ma-mi)/4+mi
+        if y <= fin:
+            url = f"http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}"
+            resp = requests.get(url)
+            df = pd.read_html(resp.text)[2]
+            df = df.drop([0,1,2,3,4,5,6,df.shape[0]-1]) #刪除多餘橫排
+            df = df.drop([0,1,2,3,4,5,6,7,8,10],axis=1) #刪除多餘直行
+            df.reset_index(drop=True,inplace=True)
 
-for i in range(len(fin_list)) :
-    x=list(fin_list[i]["close"])
-    y=x[-1]
-    stockid=code[i] 
-    ma=max(x)
-    mi=min(x)
-    fin=(ma-mi)/4+mi
-    if y <= fin:
-        url = f"http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}"
-        resp = requests.get(url)
-        df = pd.read_html(resp.text)[2]
-        df = df.drop([0,1,2,3,4,5,6,df.shape[0]-1]) #刪除多餘橫排
-        df = df.drop([0,1,2,3,4,5,6,7,8,10],axis=1) #刪除多餘直行
-        df.reset_index(drop=True,inplace=True)
+            x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
+            if max(x)-x[0]>=3 :
+                data = {
+                     'message': 
+                     "\n"+
+                     f'{stockid}{name_dict[stockid]}'+'\n'+
+                     f'股價已降至{y}元'+'\n'+
+                     f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
+                   }
+                line(data)
+                time.sleep(0.7)
         
-        x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
-        if max(x)-x[0]>=3 :
-            data = {
-                 'message': 
-                 "\n"+
-                 f'{stockid}{name_dict[stockid]}'+'\n'+
-                 f'股價已降至{y}元'+'\n'+
-                 f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
-               }
-            line(data)
-            time.sleep(0.7)
-        
+except:
+    data = {
+                'message': 
+                "\n"+
+                "運行出錯"
+            }
+    line(data)
+    quit()
