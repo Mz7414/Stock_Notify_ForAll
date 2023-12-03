@@ -145,6 +145,12 @@ try:
         mi=min(x)
         fin=(ma-mi)/4+mi
         if y <= fin:
+            data = {
+                 'message': 
+                 "\n"+
+                 f'{stockid}{name_dict[stockid]}'+'\n'+
+                 f'股價已降至{y}元'+'\n'
+            }
             line(data)
             time.sleep(0.7)
             # url = f"http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}"
