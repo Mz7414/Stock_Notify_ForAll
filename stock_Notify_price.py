@@ -149,7 +149,7 @@ try:
                  'message': 
                  "\n"+
                  f'{stockid}{name_dict[stockid]}'+'\n'+
-                 f'股價已降至{y}元'+'\n'
+                 f'股價已降至{y}元'
             }
             line(data)
             time.sleep(0.7)
