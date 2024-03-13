@@ -7,4 +7,4 @@
 所用技術:多執行緒(threads)、爬蟲、pandas、LineNotify
 
 範例：
-![](img/1.png)
+![](img/IMG_9204.jpeg)
