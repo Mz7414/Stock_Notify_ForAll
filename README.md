@@ -6,3 +6,5 @@
 有符合條件之股票即傳送通知到LineNotify\
 所用技術:多執行緒(threads)、爬蟲、pandas、LineNotify
 
+範例：
+![](img/1.png)
