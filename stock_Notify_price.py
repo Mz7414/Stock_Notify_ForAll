@@ -19,7 +19,7 @@ def stock(i):
     global code,name
     resp=requests.get(url[i])
     df=pd.read_html(resp.text)
-    x=df[0].iloc[:,11]*df[0].iloc[:,2]/10000 >=48
+    x=df[0].iloc[:,11]*df[0].iloc[:,2]/10000 >=55
     x=df[0][x]
     y=list(x.iloc[:,0])
     z=list(x.iloc[:,1])
@@ -143,8 +143,8 @@ try:
         stockid=code[i] 
         ma=max(x)
         mi=min(x)
-        fin=(ma-mi)/4+mi
-        if y <= fin:
+
+        if y <= mi:
             data = {
                  'message': 
                  "\n"+
@@ -153,22 +153,7 @@ try:
             }
             line(data)
             time.sleep(0.7)
-            # url = f"http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}"
-            # resp = requests.get(url)
-            # df = pd.read_html(resp.text)[2]
-            # df = df.drop([0,1,2,3,4,5,6,df.shape[0]-1]) #刪除多餘橫排
-            # df = df.drop([0,1,2,3,4,5,6,7,8,10],axis=1) #刪除多餘直行
-            # df.reset_index(drop=True,inplace=True)
 
-            # x = [float('{:.2f}'.format(float(df[9][i].strip('%')))) for i in range(len(df))] #取出dataframe中的外資比例
-            # if max(x)-x[0]>=3 :
-            #     data = {
-            #          'message': 
-            #          "\n"+
-            #          f'{stockid}{name_dict[stockid]}'+'\n'+
-            #          f'股價已降至{y}元'+'\n'+
-            #          f'http://jsjustweb.jihsun.com.tw/z/zc/zcl/zcl.djhtm?a={stockid}&c={start}&d={end}'        
-            #        }
             
 except:
     data = {
