@@ -1,6 +1,6 @@
 # Stock_Notify_ForAll
 偵測所有股票並挑出符合條件者 :\
-1.股價*成交量/10000 >= 55\
+1.成交值 >= 2億\
 2.當前股價 <= 近11個月最小值\
 有符合條件之股票即傳送通知到LineNotify\
 所用技術:多執行緒(threads)、爬蟲、pandas、LineNotify
