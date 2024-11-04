@@ -19,7 +19,7 @@ def stock(i):
     global code,name
     resp=requests.get(url[i])
     df=pd.read_html(resp.text)
-    x=df[0].iloc[:,11]*df[0].iloc[:,2]/10000 >=55
+    x=df[0].iloc[:,11]*df[0].iloc[:,2] >= 200000000
     x=df[0][x]
     y=list(x.iloc[:,0])
     z=list(x.iloc[:,1])
