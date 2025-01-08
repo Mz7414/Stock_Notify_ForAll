@@ -12,13 +12,15 @@ import datetime
 import time
 from dateutil.relativedelta import relativedelta
 import pandas as pd
+from io import StringIO
 
 url=[f"https://histock.tw/stock/rank.aspx?&p={i}&d=1" for i in range(1,45)]
 
 def stock(i):
     global code,name
     resp=requests.get(url[i])
-    df=pd.read_html(resp.text)
+    html = StringIO(resp.text)
+    df=pd.read_html(html)
     x=df[0].iloc[:,11]*df[0].iloc[:,2] >= 300000000
     x=df[0][x]
     y=list(x.iloc[:,0])
