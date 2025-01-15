@@ -22,5 +22,6 @@ jobs:
         pip install lxml
         pip install FinMind
         pip install requests
+        pip install tqdm
     - name: runpython
       run: python stock_Notify_price.py
